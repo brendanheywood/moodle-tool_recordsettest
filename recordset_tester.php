@@ -13,10 +13,10 @@ $use_rs = true;  # use get_recordset
 #$use_rs = false; # use get_records
 
 function mem() {
-    // return memory_get_usage(false); # this is base php memory but excludes pg client memory
+    return memory_get_usage(false); # this is base php memory but excludes pg client memory
     // return memory_get_usage(true); # this is base php memory but should include other stuff??
     // return memory_get_peak_usage(false); # this is peak php memory
-    return memory_get_peak_usage(true); # this is peak php memory
+    // return memory_get_peak_usage(true); # this is peak php memory
 }
 
 function convert($size) {
