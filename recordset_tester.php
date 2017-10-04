@@ -36,7 +36,7 @@ function convert($size) {
 
 $memory_base = mem();
 
-print "top -p ".getmypid() ." # cut and paste this\n";
+// print "top -p ".getmypid() ." # cut and paste this\n";
 // sleep(3); # so you can cut and paste the top command
 
 printf("Start php memory     = %s \n", convert(memory_get_usage()));
