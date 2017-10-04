@@ -13,9 +13,15 @@ $use_rs = true;  # use get_recordset
 #$use_rs = false; # use get_records
 
 function mem() {
-    return memory_get_usage(false); # this is base php memory but excludes pg client memory
+    $cmd = "ps -p " .getmypid()." -o vsz"; # wow! super horrible :)
+    $mem1 = `$cmd`;
+    preg_match_all('!\d+!', $mem1, $matches);
+    $mem2 = $matches[0][0] * 1024;
+    return $mem2;
+
+    // return memory_get_usage(false); # this is base php memory but excludes pg client memory
     // return memory_get_usage(true); # this is base php memory but should include other stuff??
-    // return memory_get_peak_usage(false); # this is peak php memory
+    // return memory_get_peak_usage(false); # this is peak php memory
     // return memory_get_peak_usage(true); # this is peak php memory
 }
 
@@ -31,9 +37,10 @@ function convert($size) {
 $memory_base = mem();
 
 print "top -p ".getmypid() ." # cut and paste this\n";
-sleep(3); # so you can cut and paste the top command
+// sleep(3); # so you can cut and paste the top command
 
-printf("Start memory = %s \n", convert($memory_base));
+printf("Start php memory     = %s \n", convert(memory_get_usage()));
+printf("Start process memory = %s \n", convert($memory_base));
 
 echo "Size             RS      Loop     After Count\n";
 
@@ -71,9 +78,12 @@ FROM
 
     printf("%-9d %9s %9s %9s %d\n",
         $size,
-        convert($mem_before_rs   - $memory_base),
-        convert($mem_before_loop - $memory_base),
-        convert($mem_after_loop  - $memory_base),
+        // convert($mem_before_rs   - $memory_base),
+        convert($mem_before_rs),
+        // convert($mem_before_loop - $memory_base),
+        convert($mem_before_loop),
+        // convert($mem_after_loop  - $memory_base),
+        convert($mem_after_loop),
         $count
     );
 
@@ -89,6 +99,6 @@ FROM
 
 $memory_base = mem();
 
-printf("End memory = %s \n", convert($memory_base));
-
+printf("Start php memory   = %s \n", convert(memory_get_usage()));
+printf("End process memory = %s \n", convert($memory_base));
 
