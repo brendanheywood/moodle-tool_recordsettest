@@ -7,7 +7,7 @@ require_once('../../../config.php');
 $size = 10000; #start sise
 $ramp = 1.5;  # how quickly is ramps up
 $delay = 1; # sleep for 1 second between runs
-$limit = 1024 * 1024 * 2; # db rows maximum
+$limit = 1024 * 1024 * 20; # db rows maximum
 
 $use_rs = true;  # use get_recordset
 #$use_rs = false; # use get_records
