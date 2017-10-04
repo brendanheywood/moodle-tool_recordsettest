@@ -1,7 +1,7 @@
 <?php
 
 define('CLI_SCRIPT', true);
-require_once('config.php');
+require_once('../../../config.php');
 
 
 $size = 10000; #start sise
