@@ -42,7 +42,7 @@ $memory_base = mem();
 printf("Start php memory     = %s \n", convert(memory_get_usage()));
 printf("Start process memory = %s \n", convert($memory_base));
 
-echo "Size             RS      Loop     After Count\n";
+echo "Size            PHP        RS      Loop     After Count\n";
 
 for(;;) {
 
@@ -76,8 +76,9 @@ FROM
     $mem_after_loop = mem();
 
 
-    printf("%-9d %9s %9s %9s %d\n",
+    printf("%-9d %9s %9s %9s %9s %d\n",
         $size,
+        convert(memory_get_usage()),
         // convert($mem_before_rs   - $memory_base),
         convert($mem_before_rs),
         // convert($mem_before_loop - $memory_base),
